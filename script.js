@@ -20,19 +20,23 @@ function getRandomColor() {
 
 let pixels = document.querySelectorAll(".pix");
 
-pixels.forEach((pixel) => {
-    pixel.addEventListener("mouseover", () => {
-        pixel.style.background = getRandomColor();
-        console.log(pixel.style.opacity);
-        if (pixel.style.opacity==="") {
-            pixel.style.opacity=0.1;
-        }        
-        else if (pixel.style.opacity>0&&pixel.style.opacity<=1){
-            pixel.style.opacity=parseFloat(pixel.style.opacity)+0.1;
-        }
-               
+function hoverCheck() {
+    pixels.forEach((pixel) => {
+        pixel.addEventListener("mouseover", () => {
+            pixel.style.background = getRandomColor();
+            console.log(pixel.style.opacity);
+            if (pixel.style.opacity==="") {
+                pixel.style.opacity=0.1;
+            }        
+            else if (pixel.style.opacity>0&&pixel.style.opacity<=1){
+                pixel.style.opacity=parseFloat(pixel.style.opacity)+0.1;
+            }
+                
+        });
     });
-});
+}
+
+hoverCheck();
 
 btn.addEventListener("click", () => {
     let selectSize = parseInt(prompt("Introduce the number of squares per side:"));
@@ -46,16 +50,16 @@ btn.addEventListener("click", () => {
             pix.setAttribute("class", "pix");
             pix.style.width = 640/selectSize+"px";
             pix.style.height = 640/selectSize+"px";
-            container.appendChild(pix);
-            pixels = document.querySelectorAll(".pix");
-
-            pixels.forEach((pixels) => {
-                pixels.addEventListener("mouseover", () => {
-                    pixels.style.background = getRandomColor();
-                });
-            });
+            container.appendChild(pix);            
         }
-        
+        pixels = document.querySelectorAll(".pix");
+
+        pixels.forEach((pixels) => {
+            pixels.addEventListener("mouseover", () => {
+                pixels.style.background = getRandomColor();
+            });
+        });
+        hoverCheck();
     }
     else {
         alert ("Not a valid grid size. A minimum size of 4 and a maximum size of 100, only even numbers allowed.");
